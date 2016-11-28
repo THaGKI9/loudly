@@ -1,0 +1,29 @@
+{
+  "name": "loudly",
+  "version": "1.0.0",
+  "description": "Loudly offers you a platform for your audience to discuss. It's convenient to integrate with your site.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/THaGKI9/loudly.git"
+  },
+  "keywords": [
+    "discuss",
+    "comment",
+    "community"
+  ],
+  "author": "THaGKI9",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/THaGKI9/loudly/issues"
+  },
+  "homepage": "https://github.com/THaGKI9/loudly#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "sqlite3": "^3.1.8"
+  }
+}
