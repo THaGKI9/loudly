@@ -1,39 +1,31 @@
-var config = {}
-
+let config = {}
+module.exports = config;
 
 config.development = {
-    'allowAnonymous': true,
-    'admin': null,
-    'database': {
-        'driver': 'sqlite',
-        'filename': './content/db/loudly-dev.db'
-    }
+    allowAnonymous: true,
+    admin: null,
+    database: './content/db/loudly-dev.sqlite',
+    databaseDebug: true
 };
 
 
 config.production = {
-    'allowAnonymous': true,
-    'admin': {
-        'user': 'loudly',
-        'password': 'admin',
+    allowAnonymous: true,
+    admin: {
+        user: 'loudly',
+        password: 'admin',
     },
-    'database': {
-        'driver': 'sqlite',
-        'filename': './content/db/loudly-prod.db'
-    }
+    database: './content/db/loudly-prod.sqlite',
+    databaseDebug: false
 };
 
 
 config.test = {
-    'allowAnonymous': true,
-    'admin': {
-        'user': 'loudly',
-        'password': 'test'
+    allowAnonymous: true,
+    admin: {
+        user: 'loudly',
+        password: 'admin',
     },
-    'database': {
-        'driver': 'sqlite',
-        'filename': './content/db/loudly-test.db'
-    }
+    database: './content/db/loudly-test.sqlite',
+    databaseDebug: false
 };
-
-module.exports = config;

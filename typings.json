@@ -1,7 +1,14 @@
 {
   "globalDependencies": {
+    "bluebird": "registry:dt/bluebird#3.0.0+20161007114152",
     "express": "registry:dt/express#4.0.0+20160708185218",
     "node": "registry:dt/node#6.0.0+20161110151007",
+    "sequelize": "registry:dt/sequelize#3.4.1+20160929080558",
     "sqlite3": "registry:dt/sqlite3#2.2.3+20160724070935"
+  },
+  "globalDevDependencies": {
+    "mocha": "registry:dt/mocha#2.2.5+20161028141524",
+    "should": "registry:dt/should#8.1.1+20160608082854",
+    "supertest": "registry:dt/supertest#1.1.0+20161009200303"
   }
 }

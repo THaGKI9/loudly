@@ -4,7 +4,8 @@
   "description": "Loudly offers you a platform for your audience to discuss. It's convenient to integrate with your site.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests"
+    "start": "node index.js",
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,16 @@
   },
   "homepage": "https://github.com/THaGKI9/loudly#readme",
   "dependencies": {
+    "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "extend": "^3.0.0",
+    "sequelize": "^3.27.0",
     "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "should": "^11.1.1",
+    "supertest": "^2.0.1"
   }
 }
