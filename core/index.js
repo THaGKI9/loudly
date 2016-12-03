@@ -1,10 +1,12 @@
 function errorHandler(err, req, res, next) {
   console.error(err.stack);
-  res.status(500).send('I AM DOWN');
+  res.status(500).send('Internal Server Error');
 }
 
 module.exports = function createLoudly(env) {
   const express = require('express');
+  const expressSession = require('express-session');
+  const securityHelpers = require('./helpers/security');
   const db = require('./db');
 
   let app = express();
@@ -25,6 +27,12 @@ module.exports = function createLoudly(env) {
   /* create tables */
   sequelize.sync();
 
+  let sessionSecret = securityHelpers.getRandomString(32);
+  app.use(expressSession({
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: true
+  }));
   app.use('/', require('./routes'));
   app.use(errorHandler);
 

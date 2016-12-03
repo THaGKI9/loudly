@@ -12,7 +12,8 @@ function createConfiguration(app) {
 
   /* set default config */
   let defaultConfig = {
-    comments_per_page: 20
+    loginTimeout: 5 * 60 * 1000,
+    commentsPerPage: 20
   };
 
   let appConfig = extend({}, defaultConfig, config);

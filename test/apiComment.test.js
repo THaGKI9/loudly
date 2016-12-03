@@ -27,7 +27,7 @@ function validateComment(comment) {
   timestamp.should.not.be.a.NaN();
 }
 
-describe('API Comment', () => {
+describe('./core/routes/api/comment.js', () => {
 
   describe('#getComments', () => {
 
@@ -196,6 +196,8 @@ describe('API Comment', () => {
   describe('#deleteComment', () => {
 
     beforeEach(base.resetDatabase);
+    before(() => { base.appConfig.disableAuth = true; });
+    after(() => { base.appConfig.disableAuth = false; });
 
     /**
      * insert and resolve the comment id with promise

@@ -1,13 +1,9 @@
 /**
- * This file contains RESTful interface definations
- * and exposes an Express Router instance
- *
- * Every request should contain `unique id` in your query string,
+ * every request should contain `unique id` in your query string,
  * which is an identify of your entity.
  */
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const middlewares = require('../middlewares');
 
 let router = express.Router();
@@ -17,10 +13,9 @@ let router = express.Router();
  *
  * response:
  * - 400 Bad Request: missing unique id
+ *   { "code": 400, "msg": "missing unique id" }
  * */
-router
-.use(bodyParser.json())
-.use(function getUniqueIdMiddleware(req, res, next) {
+router.use('/comment/', function getUniqueIdMiddleware(req, res, next) {
   let uid = req.query.uniqueId;
 
   // missing unique id
@@ -44,10 +39,8 @@ router
  *
  * response:
  * - 200 OK: success
- *
- * examples:
- * - status code: 200 OK
  *   {
+ *     "code": 200,
  *     "data": {
  *       "uniqueId": 0,
  *       "comments": [{
@@ -62,11 +55,11 @@ router
  */
 router.get('/comment/', (req, res, err) => {
   const Comment = res.app.get('models').Comment;
-  const COMMENTS_PER_PAGE = req.app.get('config').comments_per_page;
+  const commentsPerPage = req.app.get('config').commentsPerPage;
 
   let uniqueId = res.locals.uid;
   let page = parseInt(req.query.page) || 0;
-  let limit = parseInt(req.query.limit) || COMMENTS_PER_PAGE;
+  let limit = parseInt(req.query.limit) || commentsPerPage;
 
   Comment.findAll({
     where: { uniqueId: uniqueId },
@@ -74,9 +67,7 @@ router.get('/comment/', (req, res, err) => {
     page: page
   })
   .then((comments) => {
-    res
-    .status(200)
-    .json({
+    res.status(200).json({
       code: 200,
       data: {
         uniqueId: uniqueId,
@@ -102,12 +93,8 @@ router.get('/comment/', (req, res, err) => {
  *
  * response:
  * - 201 Created: success
- * - 400 Bad Request: content is empty of full of spaces
- * - 403 Forbidden: this comment can not be commented
- *
- * examples:
- * - status code: 201 Created
  *   {
+ *     "code": 201,
  *     "data": {
  *       "uniqueId": 0,
  *       "comment": {
@@ -120,11 +107,11 @@ router.get('/comment/', (req, res, err) => {
  *     }
  *   }
  *
- * - status code: 400 Bad Request
- *   { "msg": "content is empty of full of spaces" }
+ * - 400 Bad Request: content is empty of full of spaces
+ *   { "code": 400, "msg": "content is empty of full of spaces" }
  *
- * - status code: 403 Forbidden
- *   { "msg": "this entity is not allowed to be commented" }
+ * - 403 Forbidden: this comment can not be commented
+ *   { "code": 403, "msg": "this entity is not allowed to be commented" }
  */
 router.post('/comment/', (req, res, err) => {
   const models = res.app.get('models');
@@ -184,14 +171,10 @@ router.post('/comment/', (req, res, err) => {
  *
  * response:
  * - 204 No Content: success
- * - 404 Not Found: this comment doesn't exist
- *
- * example:
- * - 204 No Content
  *   {}
  *
- * - 404 Not Found
- *   { "msg": "this comment doesn't exist" }
+ * - 404 Not Found: this comment doesn't exist
+ *   { "code": 404, "msg": "this comment doesn't exist" }
  */
 router.delete('/comment/', middlewares.needAuth, (req, res, err) => {
   const models = res.app.get('models');

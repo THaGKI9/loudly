@@ -3,6 +3,7 @@ const createApp = require('../core');
 const testEnvironment = 'test';
 
 let app = createApp(testEnvironment);
+let appConfig = app.get('config');
 let models = app.get('models');
 let sequelize = app.get('sequelize');
 
@@ -41,6 +42,7 @@ function toggleSQLEcho() {
 
 module.exports = {
   request: request,
+  appConfig: appConfig,
   models: models,
   resetDatabase: resetDatabase,
   toggleSQLEcho: toggleSQLEcho

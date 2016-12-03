@@ -1,4 +1,4 @@
-let config = {}
+let config = {};
 module.exports = config;
 
 config.development = {
